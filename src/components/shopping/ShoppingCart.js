@@ -11,7 +11,7 @@ export default function ShoppingCart({isOpen, setOpen}) {
 
     const total = () => {
         return(
-            basket?.reduce((amount, item) => amount + item.price, 0)
+            basket?.reduce((amount, item) => amount + item.price * item.quantity, 0)
         )
     }
 

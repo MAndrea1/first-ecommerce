@@ -3,7 +3,6 @@ export default function reducer(state, action) {
     switch (action.type) {
         case 'ADD_TO_BASKET':
             const exists = state.basket.findIndex((item) => item.id === action.payload.id);
-            console.log('exists:',exists)
             if (exists !== -1) {
                 const newState = state.basket.map((item) => {
                     if (item.id === action.payload.id) {
@@ -17,7 +16,6 @@ export default function reducer(state, action) {
                 //     {...state.basket[exists], quantity: state.basket[exists].quantity + 1},
                 //     ...state.basket.slice(exists + 1)
                 // ];
-                console.log('newState:',newState)
                 return {
                     ...state,
                     basket: newState,
@@ -33,15 +31,46 @@ export default function reducer(state, action) {
                     totalItems: state.totalItems + 1
                 };
         case 'REMOVE_FROM_BASKET':
-            return{
-                ...state,
-                basket: state.basket.filter(order => order.ticket !== action.payload),
-                totalItems: state.totalItems - 1
+            const index = state.basket.findIndex((item) => item.id === action.payload.id);
+            console.log(state.basket)
+            console.log(state.basket[index].quantity)
+            if (state.basket[index].quantity > 1) {
+                const newState = state.basket.map((item) => {
+                    if (item.id === action.payload.id) {
+                        return {...item, quantity: item.quantity - 1}
+                    } else {
+                        return item
+                    }
+                })
+                return {
+                    ...state,
+                    basket: newState,
+                    totalItems: state.totalItems - 1
+                };
             }
+            const removedState = [
+                ...state.basket
+            ];
+            removedState.splice(index,1)
+            return {
+                ...state,
+                basket: removedState,
+                totalItems: state.totalItems - 1
+            };
         case 'EDIT_PRODUCT':
             return{
                 ...state,
                 basket: [...state.basket]
+            }
+        case 'SET_USER_NAME':
+            return{
+                ...state,
+                user: action.payload
+            }
+        case 'EMPTY_BASKET':
+            return{
+                ...state,
+                basket: []
             }
         default: return state;
     }

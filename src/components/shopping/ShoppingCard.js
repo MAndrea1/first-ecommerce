@@ -7,7 +7,7 @@ const ShoppingCard = ({product}) => {
 
     const Handleremove = (e) => {
         e.preventDefault()
-        removefrombasket(product.ticket)
+        removefrombasket(product)
       }
 
     return (

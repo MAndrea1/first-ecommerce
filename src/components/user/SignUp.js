@@ -1,10 +1,12 @@
 import { ReactComponent as Logo } from '../../media/Logo.svg';
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
+const navigate = useNavigate()
 const [name, setName] = useState()
 const [email, setEmail] = useState()
 const [password, setPassword] = useState()
@@ -18,12 +20,22 @@ const handleSignUp = (e) => {
     // Signed in
     const user = userCredential.user;
     console.log(user)
+    updateProfile(auth.currentUser, {
+      displayName: name
+    }).then(() => {
+      // Profile updated!
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+    });
+    navigate('/')
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorMessage)
+    console.log(errorCode, errorMessage)
     // ..
   });
 }
