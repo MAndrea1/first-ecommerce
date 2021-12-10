@@ -1,5 +1,6 @@
 import DataProducts from "../../DataProducts"
 import ProductCard from "./ProductCard"
+import { useEffect } from "react"
  
   export default function ProductList() {
 

@@ -19,7 +19,9 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [isOpen, setOpen] = useState(false)
-  const {user} = useContext(Context)
+  const {user, basket} = useContext(Context)
+
+  console.log(basket)
 
   return (
     <Disclosure as="nav" className="bg-brown-700 fixed w-screen z-40">
@@ -38,7 +40,7 @@ export default function Navbar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="invisible flex-1 sm:visible flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center ml-2">
                   <Logo className='block h-8 w-auto'aria-hidden="true"/>                 
                   <h1 className='text-2xl italic text-gray-200 lg:block sm:hidden'>'N Craft</h1>
@@ -63,11 +65,13 @@ export default function Navbar() {
               </div>
               <div className="inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <h3 className="text-brown-300 mr-3">Hello, {user}!</h3>
+                <Link to='/sign-in'>
                 <button
                   type="button"
                   className="px-4 bg-brown-600 navbtn"
-                > Sign Up
+                > Sign In
                 </button>
+                </Link>
                 <ShoppingBagIcon onClick={() => setOpen(true)} className="navbtn block h-10 ml-2 bg-brown-600"/>
                 <ShoppingCart isOpen={isOpen} setOpen={setOpen}/>
               </div>

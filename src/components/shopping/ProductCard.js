@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import NumberFormat from 'react-number-format';
 import { Context } from '../../context/Context'
 
 const ProductCard = ({product}) => {
-  const {addproduct} = useContext(Context);
+  const {basket, addproduct, editproduct} = useContext(Context);
 
   const Handleadd = (e) => {
     e.preventDefault()
-    addproduct(product)
+      addproduct(product)
   }
 
     return (

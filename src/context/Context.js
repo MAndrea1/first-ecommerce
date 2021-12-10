@@ -3,7 +3,8 @@ import reducer from "./Reducer";
 
 const initialState = {
     basket: [],
-    user: 'Guest'
+    user: 'Guest',
+    totalItems: 0
 }
 
 export const Context = createContext(initialState);
@@ -20,7 +21,11 @@ export const ContextProvider = ({children}) => {
         dispatch({type: 'REMOVE_FROM_BASKET', payload: ticket})
     }
 
-    return <Context.Provider value={{...state, addproduct, removefrombasket}}>
+    const editproduct = (id) => {
+        dispatch({type: 'EDIT_PRODUCT', payload: id})
+    }
+
+    return <Context.Provider value={{...state, addproduct, removefrombasket, editproduct}}>
         {children}
     </Context.Provider>
 }

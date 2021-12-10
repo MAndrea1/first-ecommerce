@@ -11,7 +11,7 @@ export default function ShoppingCart({isOpen, setOpen}) {
 
     const total = () => {
         return(
-            basket.reduce((amount, item) => amount + item.price, 0)
+            basket?.reduce((amount, item) => amount + item.price, 0)
         )
     }
 
@@ -58,7 +58,7 @@ export default function ShoppingCart({isOpen, setOpen}) {
                         </div>
                     </div>
 
-                    {basket.length !== 0 ? <>
+                    {basket?.length !== 0 ? <>
                     <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                         <div className="mt-8">
                             <div className="flow-root">
