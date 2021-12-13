@@ -70,7 +70,8 @@ export default function reducer(state, action) {
         case 'EMPTY_BASKET':
             return{
                 ...state,
-                basket: []
+                basket: [],
+                totalItems: 0
             }
         default: return state;
     }
